@@ -1,0 +1,62 @@
+#include<iostream>
+using namespace std;
+
+
+int check(int num,short int D)
+{
+    int num1=num,rem=0,sum1=1,sum=0,place=1;
+    while(num1)
+    {
+        rem=num1%10;
+        if(rem==D)
+        {
+            sum1=sum1*place;
+            return (sum1-sum);
+        }
+        else
+        {
+            sum=sum+rem*place;
+            place=place*10;
+            num1=num1/10;
+        }
+    }
+    return 0;
+}
+
+void solve(int num,short int D,int count)
+{
+    int num_not_present=check(num,D);
+    if(num_not_present==0)
+    {
+        cout<<count;
+        return ;
+    }
+    else
+    {
+        count=count+num_not_present;
+        num=num+num_not_present;
+        solve(num,D,count);
+    }
+}
+
+int main() {
+
+	int T;
+	cin>>T;
+	if(T>=1 && T<=100000)
+	{
+	    while(T--)
+	    {
+	        int num,count=0;
+	        short int D;
+	        cin>>num>>D;
+	        if(num>=1 &&num<=1000000000 && D>=0 &&D<=9)
+	        {
+	            solve(num,D,count);
+	            cout<<endl;
+	        }
+	    }
+	}
+
+	return 0;
+}
